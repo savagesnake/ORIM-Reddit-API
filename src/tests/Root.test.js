@@ -7,6 +7,7 @@ import { mount, shallow } from 'enzyme';
 
 describe("Component: Root",()=>{
 
-  it('does all the things');
+  it('Calls the Header component');
+
 
 });
