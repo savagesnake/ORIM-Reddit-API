@@ -1,0 +1,16 @@
+@mixin border-radius($radius){
+  -webkit-border-radius:$radius;
+  -moz-border-radius:$radius;
+  -ms-border-radius:$radius;
+  border-radius:$radius;
+}
+@mixin box-shadow($options){
+  -webkit-box-shadow:$options;
+  -moz-box-shadow:$options;
+  -ms-box-shadow:$options;
+  box-shadow:$options;
+}
+
+@mixin max-width{
+  max-width:1240px;
+}
