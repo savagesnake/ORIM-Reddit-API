@@ -1,57 +1,40 @@
-import React, {Component} from "react";
-import Axios from "axios";
-import Comment from "./Comments";
+import React from "react";
+import {Link} from "react-router";
+import noImage from "../../public/noImage.png";
+// set is as a const becuase this component does not have state
+const Post = (props) => {
+    let {title,thumbnail,url,num_comments,score,created,author,subreddit,id} = props.post;
+    //regex url to check if the url is valid
+    const urlRegex = /^(http|https)/;
+    //create date from the utc
+    let date = new Date(Date(created));
 
-export default class Post extends Component {
-  constructor(){
-      super();
-      this.state={
-        postInfo:[],
-        comments:[]
-      }
+    return(
+      <li className="article">
+        <img className="art-image" src={urlRegex.test(thumbnail) ? thumbnail : noImage} alt="not available"/>
+        <p>Author: {author}</p>
+        <p><a href={url} target="_blank">{title}</a></p>
+        <span className="date-created">created: {date.toLocaleDateString("en-US")}</span>
+        <table className="post-info">
+          <tbody>
+            <tr>
+              <td>
+                <p className="comments"> <Link  to={"/post/"+subreddit+"/"+id} >{num_comments} comments</Link></p>
+              </td>
+              <td>
+                <p>score:&nbsp; {score}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    )
   }
 
+// export post component
+export default Post;
 
-  getPostComments(){
-      // build the url to fetch data
-      const url = `https://www.reddit.com/r/${this.props.params.subreddit+'/comments/'+this.props.params.id+'.json'}`
-
-      // fetch data for single post
-      Axios.get(url)
-      .then((response)=>{
-        this.setState({
-          postInfo:response.data[0].data.children[0].data,
-          comments:response.data[1].data.children
-        })
-      })
-      .catch((errors)=>{
-        console.log(errors);
-      });
-    }
-
-    componentDidMount(){
-      this.getPostComments();
-    }
-
-
-render(){
-    const {title,thumbnail} = this.state.postInfo
-      return(
-        <article>
-          <section className="postInfo">
-            <img src={thumbnail} alt={title}/>
-            <p className="titleView">{title}</p>
-          </section>
-          <div id="comments">
-            <hr/>
-            {this.state.comments.map((comment,index)=>{
-              return(
-                <Comment key={index} comment={comment}/>
-              )
-            })
-          }
-          </div>
-        </article>
-    );
-  }
-}
+// define the prop types
+Post.propTypes ={
+  post: React.PropTypes.object
+};
