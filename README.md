@@ -40,9 +40,3 @@ https://www.reddit.com/r/all/hot
 #### Run Code
 *   npm install - to load all of the node modules
 *   npm start - to run local server on localhost:3000
-
-
-#### Run Tests
-To run all of the test, type this command in the console
-
-    node_modules/.bin/mocha --compilers js:babel-core/register ./src/tests/**/*.test.js
