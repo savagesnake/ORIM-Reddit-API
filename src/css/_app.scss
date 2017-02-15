@@ -1,9 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color:$mainColor;
+}
+
+*{
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #353148;
+  background-color: $blue;
   padding: 20px;
   color: white;
   h2{
@@ -21,7 +32,7 @@
   @include max-width;
     margin:0 auto;
     list-style-type: none;
-    padding: 0;
+    padding:30px 0px 0px 0px;
     p{
       font-size:.8em;
     }
@@ -31,61 +42,92 @@
       clear: both;
       width:100%;
     }
+    .author{
+      @include border-radius(5px);
+      background-color:$lightenBluen;
+      color:$offWhite;
+      position:absolute;
+      padding:8px 8px 15px 8px;
+      top:-40px;
+      left:5px;
+      z-index: -1;
+    }
     .article{
-      overflow: hidden;
-      float:left;
+      @include box-shadow(0px 1px 3px rgba(0,0,0,.2));
+      @include border-radius(5px);
+      background-color:lighten($mainColor,100%);
       display:inline-block;
       position: relative;
       width:32%;
-      padding:20px;
-      min-height:335px;
-      margin:8px;
-      background-color:#fff;
-      @include box-shadow(0px 1px 3px rgba(0,0,0,.2));
-      @include border-radius(5px);
-      .art-image{
-        float:left;
-        margin-right:20px;
-        margin-bottom:20px;
+      margin:.6% .6% 4% .6%;
+      float:left;
+      .article-contain{
+        @include border-radius(5px);
+        padding:20px;
+        position: relative;
+        min-height:280px;
+        overflow: hidden;
+        &:after{
+          content: "";
+          left: -15px;
+          bottom: -16px;
+          width: 115%;
+          position:absolute;
+          display:block;
+          background-color:$lightenBluen;
+          height:100px;
+          transform-origin: center;
+          transform: rotate(-5deg);
+        }
+        .art-image{
+          float:left;
+          margin-right:20px;
+          margin-bottom:20px;
+        }
+        >p{
+          margin:0px 0px 10px 0px;
+          text-align:left;
+          color:#5a5b73;
+        }
+        .date-created{
+          position:absolute;
+          bottom:60px;
+          right:20px;
+          font: italic .8em serif;
+          color:$offWhite;
+          float:right;
+          z-index:99;
+        }
+        a{
+          text-decoration: none;
+          word-break: normal;
+          color:#2c9cff;
+          &:hover{
+            color:$orange;
+          }
+        }
+        .post-info{
+          position: absolute;
+          bottom:0;
+          left:0;
+          width: 100%;
+          background-color:$lightenBluen;
+          color:#fff;
+          text-align: right;
+          z-index:99;
+          a{
+            color:$orange;
+          }
+          td{
+            padding:0px 20px;
+          }
+          td:nth-child(odd){
+            text-align: left;
+          }
+        }
       }
-      >p{
-        margin:0px 0px 10px 0px;
-        text-align:left;
-        color:#5a5b73;
-      }
-      .date-created{
-        position:absolute;
-        bottom:60px;
-        right:20px;
-        font: italic .8em serif;
-        color:#999;
-        float:right;
-      }
-      a{
-        text-decoration: none;
-        word-break: normal;
-        color:#2c9cff;
-        &:hover{
-          color:orange;
-        }
-        }
-      .post-info{
-        position: absolute;
-        bottom:0;
-        left:0;
-        width: 100%;
-        background-color:#353148;
-        color:#fff;
-        text-align: right;
-        td{
-          padding:0px 20px;
-        }
-        td:nth-child(odd){
-          text-align: left;
-        }
-        }
-    }
-}
+    } //close articles
+  } //close posts
 
 .btn-container{
   @include max-width;
@@ -97,20 +139,29 @@
       display: block;
       clear: both;
     }
-  .btn{
-    cursor: pointer;
-    padding:10px;
-    border:0px;
-    background-color:orange;
-    color:#fff;
-    @include border-radius(2px);
-    outline:none;
-    &.next{
-      float:right;
-    }
-    &.prev{
-      float:left;
-    }
+}
+.btn{
+  @include border-radius(2px);
+  cursor: pointer;
+  padding:10px;
+  border:0px;
+  background-color:$orange;
+  color:#fff;
+  outline:none;
+  text-decoration: none;
+  &.next{
+    float:right;
+  }
+  &.prev{
+    float:left;
+  }
+  &.back{
+    position: relative;
+    top: -9px;
+    width: 150px;
+    display: inline-block;
+    background-color: $blue;
+    transform: skew(-20deg);
   }
 }
 
@@ -131,7 +182,7 @@
     p{
       margin-top:30px;
     }
-    .commentAuthor{
+   .commentAuthor{
       position:absolute;;
       top:0;
       left:0;
