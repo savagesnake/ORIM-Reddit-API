@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
+import Header from './Header';
 
-const Root = () =>{
+export default class Root extends Component {
+  render(){
     return(
-      <div>Header Component here</div>
+      <div id="app">
+        <header>
+          <Header />
+        </header>
+        <section>
+          {this.props.children}
+        </section>
+      </div>
     )
+  }
 }
-
-export default Root;
