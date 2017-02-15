@@ -1,15 +1,22 @@
-import React, {Component} from "react";
-import Axios from "axios";
+import React, {Component} from 'react';
+import List from './List';
+import Buttons from './Buttons';
+import Axios from 'axios';
+
 class Posts extends Component {
   constructor(){
-    super();
-    this.state={
-      posts:[],
-      before:null,
-      after:null,
-      pgLocation:0
-    }
-}
+      super();
+      this.state={
+        posts:[],
+        before:null,
+        after:null,
+        pgLocation:0
+      }
+      this.getPosts = this.getPosts.bind(this)
+      this.prevPosts = this.prevPosts.bind(this)
+      this.nextPosts = this.nextPosts.bind(this)
+  }
+
 
 // set function to get json data and updare state
 getPosts(url){
@@ -29,11 +36,7 @@ getPosts(url){
   });
   //end of getMovies
 }
-  componentDidDount(){
-    let apiURL = "https://www.reddit.com/r/all/hot.json?limit=5";
-    //call function and pass the url
-    this.getPosts(apiURL);
-  }
+
 
   /**
   * Listings do not use page numbers because their content changes so frequently.
@@ -67,11 +70,29 @@ getPosts(url){
       this.state.pgLocation--
     }
 
+  componentDidMount(){
+    let apiURL = "https://www.reddit.com/r/all/hot.json?limit=5";
+    //call function and pass the url
+    this.getPosts(apiURL);
+  }
+
   render(){
-    console.log(this.props)
+    console.log(this.state)
     return(
-      <div>Test</div>
+      <div>
+         <Buttons pgLocation={this.state.pgLocation}  prev={this.prevPosts} next={this.nextPosts}/>
+      <ul  className="posts">
+        {this.state.posts.map((post,index)=>{
+          return(
+            <List key={index} post={post.data} />
+            )
+        })}
+      </ul>
+      <Buttons pgLocation={this.state.pgLocation} prevStatus={this.state.before} prev={this.prevPosts} next={this.nextPosts}/>
+    </div>
     );
   }
 }
+
+// export Posts component
 export default Posts;
