@@ -6,6 +6,11 @@ Using React and the Reddit API. Create an app that will display the hot reddit p
 * Allow the user to paginate through the posts
 * Style the grid and layout
 
+#### Bonus Criteria (optional)
+* Create  a page to allow us to view a post and its comments by itself. 
+* Create units tests for created components.
+* Create a search interface that allows you to do a fuzzy search on reddit posts. 
+
 #### API Reference
 API Docs:
 https://www.reddit.com/dev/API/
@@ -36,6 +41,13 @@ https://www.reddit.com/r/all/hot
         README.md
 #### Skecth
 ![sketch](public/sketch.jpg)
+
+#### completed 
+* Display 5 posts at a time.
+* Allow the user to paginate through the posts
+* Style the grid and layout
+* search filter current post displaying 
+* view a post and its comments by itself
 
 #### Run Code
 *   npm install - to load all of the node modules
