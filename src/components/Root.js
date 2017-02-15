@@ -4,14 +4,12 @@ import Header from './Header';
 export default class Root extends Component {
   render(){
     return(
-      <div id="app">
-        <header>
-          <Header />
-        </header>
+      <article className="App">
+        <Header />
         <section>
           {this.props.children}
         </section>
-      </div>
+      </article>
     )
   }
 }
