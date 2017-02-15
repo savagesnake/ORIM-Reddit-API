@@ -7,26 +7,28 @@ const Post = (props) => {
     //regex url to check if the url is valid
     const urlRegex = /^(http|https)/;
     //create date from the utc
-    let date = new Date(Date(created));
+    const date = new Date(Date(created));
 
     return(
       <li className="article">
-        <img className="art-image" src={urlRegex.test(thumbnail) ? thumbnail : noImage} alt="not available"/>
-        <p>Author: {author}</p>
-        <p><a href={url} target="_blank">{title}</a></p>
-        <span className="date-created">created: {date.toLocaleDateString("en-US")}</span>
-        <table className="post-info">
-          <tbody>
-            <tr>
-              <td>
-                <p className="comments"> <Link  to={"/post/"+subreddit+"/"+id} >{num_comments} comments</Link></p>
-              </td>
-              <td>
-                <p>score:&nbsp; {score}</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <p className="author">Author: {author}</p>
+        <div className="article-contain">
+          <img className="art-image" src={urlRegex.test(thumbnail) ? thumbnail : noImage} alt="not available"/>
+          <p><a href={url} target="_blank">{title}</a></p>
+          <span className="date-created">created: {date.toLocaleDateString("en-US")}</span>
+          <table className="post-info">
+            <tbody>
+              <tr>
+                <td>
+                  <p className="comments"> <Link  to={"/post/"+subreddit+"/"+id} >{num_comments} comments</Link></p>
+                </td>
+                <td>
+                  <p>score:&nbsp; {score}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </li>
     )
   }
