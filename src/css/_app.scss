@@ -215,3 +215,37 @@ hr{
     color:#333;
   }
 }
+
+#filter{
+  position:relative;
+  .filter-box{
+    background-color:darken($blue, 4%);
+    border-top:1px solid darken($blue, 8%);
+    text-transform: uppercase;
+    text-align:center;
+    color:$offWhite;
+    width:100%;
+    padding:15px;
+    border:0px;
+    outline:0px;
+
+
+  }
+  label{
+    &:after{
+      content:'';
+      border-color:transparent transparent $offWhite $offWhite ;
+      transform: rotate(50deg);
+      border-width: 0px 0px 1px 1px ;
+      border-style: solid ;
+      position: absolute;
+      display: block;
+      margin: auto;
+      width:20px;
+      height:20px;
+      right:20px;
+      top:0;
+      bottom: 0;
+    }
+  }
+}

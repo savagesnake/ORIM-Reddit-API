@@ -8,6 +8,7 @@ class List extends Component {
       super();
       this.state={
         posts:[],
+        search:"",
         before:null,
         after:null,
         pgLocation:0
@@ -15,6 +16,8 @@ class List extends Component {
       this.getPosts = this.getPosts.bind(this)
       this.prevPosts = this.prevPosts.bind(this)
       this.nextPosts = this.nextPosts.bind(this)
+      this.updateSearch = this.updateSearch.bind(this)
+
   }
 
 
@@ -70,6 +73,13 @@ getPosts(url){
       this.state.pgLocation--
     }
 
+    //updatet the statet of search to the value typed in
+    updateSearch(event){
+        this.setState({
+          search: event.target.value
+        });
+    }
+
   componentDidMount(){
     let apiURL = "https://www.reddit.com/r/all/hot.json?limit=5";
     //call function and pass the url
@@ -77,11 +87,22 @@ getPosts(url){
   }
 
   render(){
+    //set a filter for any tyoe letter in the input box
+    let filterPosts = this.state.posts.filter((post)=>{
+        return (
+          post.data.title.toLowerCase().indexOf(this.state.search) !== -1
+        )
+      }
+    );
     return(
       <div>
+        <section id="filter">
+            <label></label>
+          <input className="filter-box" type="text" value={this.state.Posts} onChange={this.updateSearch.bind(this)} placeholder="Search Filter"/>
+        </section>
          <Buttons pgLocation={this.state.pgLocation}  prev={this.prevPosts} next={this.nextPosts}/>
       <ul  className="posts">
-        {this.state.posts.map((post,index)=>{
+        {filterPosts.map((post,index)=>{
           return(
             <Post key={index} post={post.data} />
             )
