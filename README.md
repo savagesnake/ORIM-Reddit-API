@@ -46,7 +46,7 @@ https://www.reddit.com/r/all/hot
 * Display 5 posts at a time.
 * Allow the user to paginate through the posts
 * Style the grid and layout
-* search filter current post displaying 
+* search filter current posts displaying 
 * view a post and its comments by itself
 
 #### Run Code
